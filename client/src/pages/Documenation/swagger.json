@@ -1,0 +1,372 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a to do list server",
+    "version": "1.0.0",
+    "title": "To do list"
+  },
+  "host": "term-project-backend.herokuapp.com",
+  "basePath": "/api/v1",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/tags": {
+      "get": {
+        "tags": [
+          "tags"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "default": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "todos": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Tag"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "tags"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "tag",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Tag"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/tags/{tagId}": {
+      "parameters": [
+        {
+          "in": "path",
+          "required": true,
+          "name": "tagId",
+          "type": "integer"
+        }
+      ],
+      "delete": {
+        "tags": [
+          "tags"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/todos": {
+      "get": {
+        "tags": [
+          "todos"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "todos": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Todo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "todos"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Todo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/routes": {
+      "get": {
+        "tags": [
+          "routes"
+        ],
+        "description": "Get route statistics",
+        "operationId": "getsRoutes",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "routes": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Route"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/todos/{todoId}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "todoId",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "put": {
+        "tags": [
+          "todos"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Todo",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Todo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "todos"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/todos/{todoId}/tags": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "todoId",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "tags": [
+          "todos"
+        ],
+        "description": "Get active tags for a todo",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Tag"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "todos"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Tags",
+            "description": "Array of tag ids to set for a todo",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Create user",
+        "description": "Creates a new user",
+        "operationId": "createUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/users/login": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "description": "Gets the login token for the user",
+        "operationId": "login",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Todo": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "details": {
+          "type": "string"
+        },
+        "completed": {
+          "type": "boolean"
+        },
+        "created_at": {
+          "type": "integer"
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "User"
+      }
+    },
+    "Route": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        },
+        "hits": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}
